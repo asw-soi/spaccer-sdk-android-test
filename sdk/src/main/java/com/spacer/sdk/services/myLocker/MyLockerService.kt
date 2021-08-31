@@ -10,7 +10,7 @@ import com.spacer.sdk.data.extensions.RetrofitCallExtensions.enqueue
 import com.spacer.sdk.models.myLocker.*
 
 class MyLockerService {
-    fun get(token: String, callback: IResultCallback<List<MyLockerModel>?>) {
+    fun get(token: String, callback: IResultCallback<List<MyLockerModel>>) {
         val mapper = MyLockerListResDataMapper()
 
         api.myLocker.get().enqueue(callback, mapper)

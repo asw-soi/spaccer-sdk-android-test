@@ -5,8 +5,8 @@ import java.io.Serializable
 class SPRConst {
 
     companion object {
-        val BaseURL = "https://ex-app.spacer.co.jp"
-        val ScanSeconds = 2.5
+        const val BaseURL = "https://ex-app.spacer.co.jp"
+        const val ScanMills: Long = 2500
     }
 }
 

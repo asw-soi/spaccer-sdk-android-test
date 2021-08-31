@@ -6,12 +6,13 @@ import com.spacer.sdk.data.api.resData.sprLocker.SPRLockerGetResData
 import com.spacer.sdk.data.api.resData.sprLocker.SPRLockerUnitGetResData
 import retrofit2.Call
 import retrofit2.http.Body
+import retrofit2.http.Header
 import retrofit2.http.POST
 
 interface ISPRLockerAPI {
-    @POST("exApp/locker/spacer/get")
-    fun getLockers(@Body params: SPRLockerGetReqData): Call<SPRLockerGetResData>
+    @POST("locker/spacer/get")
+    fun getLockers(@Header(APIHeader.Token) token: String, @Body params: SPRLockerGetReqData): Call<SPRLockerGetResData>
 
-    @POST("exApp/locker/unit/get")
-    fun getUnits(@Body params: SPRLockerUnitGetReqData): Call<SPRLockerUnitGetResData>
+    @POST("locker/unit/get")
+    fun getUnits(@Header(APIHeader.Token) token: String, @Body params: SPRLockerUnitGetReqData): Call<SPRLockerUnitGetResData>
 }

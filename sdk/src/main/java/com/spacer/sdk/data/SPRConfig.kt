@@ -1,10 +1,6 @@
 package com.spacer.sdk.data
 
-class SPRConfig {
-    constructor(
-        baseURL: String = SPRConst.BaseURL,
-        scanSeconds: Double = SPRConst.ScanSeconds
-    )
+class SPRConfig(val baseURL: String = SPRConst.BaseURL, val scanMills: Long = SPRConst.ScanMills) {
 
     companion object {
         val Default = SPRConfig()

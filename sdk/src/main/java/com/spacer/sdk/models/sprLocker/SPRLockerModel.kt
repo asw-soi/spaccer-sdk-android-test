@@ -15,7 +15,7 @@ fun SPRLockerResData.toModel(): SPRLockerModel {
     return SPRLockerModel(id, statusEnum, size)
 }
 
-class SPRLockerListMapper : IMapper<SPRLockerGetResData, List<SPRLockerModel>?> {
-    override fun map(source: SPRLockerGetResData) = source.spacers?.map { it.toModel() }
+class SPRLockerListMapper : IMapper<SPRLockerGetResData, List<SPRLockerModel>> {
+    override fun map(source: SPRLockerGetResData) = source.spacers?.map { it.toModel() } ?: listOf()
 }
 

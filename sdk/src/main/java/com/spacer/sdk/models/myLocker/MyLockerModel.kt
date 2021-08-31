@@ -25,7 +25,7 @@ class MyLockerShareUrlKeyResDataMapper : IMapper<MyLockerShareUrlKeyResData, MyL
     override fun map(source: MyLockerShareUrlKeyResData) = source.myLocker?.toModel()
 }
 
-class MyLockerListResDataMapper : IMapper<MyLockerGetResData, List<MyLockerModel>?> {
-    override fun map(source: MyLockerGetResData) = source.myLockers?.map { it.toModel() }
+class MyLockerListResDataMapper : IMapper<MyLockerGetResData, List<MyLockerModel>> {
+    override fun map(source: MyLockerGetResData) = source.myLockers?.map { it.toModel() } ?: listOf()
 }
 

@@ -26,7 +26,7 @@ fun SPRLockerUnitResData.toModel(): SPRLockerUnitModel {
     return SPRLockerUnitModel(id, open, close, address, spacers)
 }
 
-class SPRLockerUnitGetReqDataMapper : IMapper<SPRLockerUnitGetResData, List<SPRLockerUnitModel>?> {
-    override fun map(source: SPRLockerUnitGetResData) = source.units?.map { it.toModel() }
+class SPRLockerUnitGetReqDataMapper : IMapper<SPRLockerUnitGetResData, List<SPRLockerUnitModel>> {
+    override fun map(source: SPRLockerUnitGetResData) = source.units?.map { it.toModel() } ?: listOf()
 }
 

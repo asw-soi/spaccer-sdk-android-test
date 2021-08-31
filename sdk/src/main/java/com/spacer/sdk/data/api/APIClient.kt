@@ -17,10 +17,6 @@ class APIClient {
         Interceptor { chain ->
             val request = chain.request().newBuilder()
                 .addHeader("Accept", "application/json")
-                .addHeader(
-                    "X-Spacer-ExApp-Token",
-                    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcGlLZXlJZCI6InA0Tmwwa1NhY1hWbnRlbUhnWk1hSFpyMXAyMlhSVExmaDNtYjd5TSIsInVzZXJJZCI6Ii1NX2NWNzY0Q2RwaUVCdTVQRW40IiwiaWF0IjoxNjI5MzQ5NDQwLCJleHAiOjE2Mjk5NTQyNDB9.QBibwqr9jSvxPgzw5V8cPGMmI2c3NVjMgTgBznm-tz8"
-                )
                 .addHeader("User-Agent", userAgent)
                 .build()
             return@Interceptor chain.proceed(request)
@@ -43,15 +39,15 @@ class APIClient {
 
 
     private val retrofit = Retrofit.Builder()
-//            .baseUrl("https://api-vsv0ukl18tz6dm.spacer.co.jp")
-        .baseUrl("http://120.143.1.101:8008")
+        .baseUrl("${APIConst.BaseURL}/")
         .addConverterFactory(GsonConverterFactory.create())
         .client(httpBuilder.build())
         .build()
 
 
-    val sprLocker: ISPRLockerAPI by lazy { retrofit.create(ISPRLockerAPI::class.java) }
+    val key: IKeyAPI by lazy { retrofit.create(IKeyAPI::class.java) }
     val myLocker: IMyLockerAPI by lazy { retrofit.create(IMyLockerAPI::class.java) }
+    val sprLocker: ISPRLockerAPI by lazy { retrofit.create(ISPRLockerAPI::class.java) }
 }
 
 val api = APIClient()
