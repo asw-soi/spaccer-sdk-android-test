@@ -1,0 +1,18 @@
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:startDestination="@id/tabCB">
+    <fragment
+        android:id="@+id/tabCB"
+        android:name="com.spacer.example.cbLocker.CBLockerFragment"
+        android:label="tabCB" />
+
+    <fragment
+        android:id="@+id/tabMy"
+        android:name="com.spacer.example.myLocker.MyLockerFragment"
+        android:label="tabMy" />
+
+    <fragment
+        android:id="@+id/tabSPR"
+        android:name="com.spacer.example.sprLocker.SPRLockerFragment"
+        android:label="tabSPRr" />
+</navigation>
