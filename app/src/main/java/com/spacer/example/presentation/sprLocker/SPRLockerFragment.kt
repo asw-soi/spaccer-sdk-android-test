@@ -1,4 +1,4 @@
-package com.spacer.example.myLocker
+package com.spacer.example.presentation.sprLocker
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,13 +6,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import com.spacer.example.R
-import com.spacer.example.databinding.FragmentMyLockerBinding
 import com.spacer.example.databinding.FragmentSprLockerBinding
 
 
-class MyLockerFragment : Fragment() {
-    private lateinit var binding: FragmentMyLockerBinding
+class SPRLockerFragment : Fragment() {
+    private lateinit var binding: FragmentSprLockerBinding
+    private val viewModel by lazy { ViewModelProvider(this).get(SPRLockerViewModel::class.java) }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -21,8 +22,9 @@ class MyLockerFragment : Fragment() {
     ): View {
         super.onCreateView(inflater, container, savedInstanceState)
 
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_my_locker, container, false)
-        binding.listener = this
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_spr_locker, container, false)
+        binding.viewModel = viewModel
+        binding.listener = SPRLockerListener(this)
         binding.lifecycleOwner = this
 
         return binding.root

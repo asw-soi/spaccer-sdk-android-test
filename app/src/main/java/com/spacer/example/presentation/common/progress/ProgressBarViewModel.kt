@@ -1,4 +1,4 @@
-package com.spacer.example.common
+package com.spacer.example.presentation.common.progress
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel

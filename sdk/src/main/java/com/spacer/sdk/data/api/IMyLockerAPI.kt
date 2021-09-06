@@ -6,18 +6,19 @@ import com.spacer.sdk.data.api.reqData.myLocker.MyLockerShareUrlKeyReqData
 import com.spacer.sdk.data.api.resData.myLocker.*
 import retrofit2.Call
 import retrofit2.http.Body
+import retrofit2.http.Header
 import retrofit2.http.POST
 
 interface IMyLockerAPI {
     @POST("myLocker/get")
-    fun get(): Call<MyLockerGetResData>
+    fun get(@Header(APIHeader.Token) token: String): Call<MyLockerGetResData>
 
     @POST("myLocker/reserve")
-    fun reserve(@Body params: MyLockerReserveReqData): Call<MyLockerReserveResData>
+    fun reserve(@Header(APIHeader.Token) token: String, @Body params: MyLockerReserveReqData): Call<MyLockerReserveResData>
 
     @POST("myLocker/reserveCancel")
-    fun reserveCancel(@Body params: MyLockerReserveCancelReqData): Call<MyLockerReserveCancelResData>
+    fun reserveCancel(@Header(APIHeader.Token) token: String, @Body params: MyLockerReserveCancelReqData): Call<MyLockerReserveCancelResData>
 
     @POST("myLocker/shared")
-    fun shareUrlKey(@Body params: MyLockerShareUrlKeyReqData): Call<MyLockerShareUrlKeyResData>
+    fun shareUrlKey(@Header(APIHeader.Token) token: String, @Body params: MyLockerShareUrlKeyReqData): Call<MyLockerShareUrlKeyResData>
 }

@@ -16,6 +16,12 @@ android {
         versionCode 1
         versionName "1.0"
 
+        def properties = new Properties()
+        properties.load(project.rootProject.file('local.properties').newDataInputStream())
+
+        def SPR_TOKEN = properties.getProperty("spr_token")
+        buildConfigField("String", "SPR_TOKEN", "\"${SPR_TOKEN}\"")
+
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 

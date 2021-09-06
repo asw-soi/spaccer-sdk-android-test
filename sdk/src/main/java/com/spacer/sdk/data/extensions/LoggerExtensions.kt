@@ -13,8 +13,5 @@ object LoggerExtensions {
     inline val <reified T> T.TAG: String get() = T::class.java.simpleName
 
     inline fun <reified T> T.logd(msg: String) = Log.d(TAG, msg)
-    inline fun <reified T> T.logd(msg: String, tr: Throwable?) = Log.d(TAG, msg, tr)
-    inline fun <reified T> T.logw(msg: String) = Log.w(TAG, msg)
-    inline fun <reified T> T.loge(msg: String) = Log.e(TAG, msg)
-    inline fun <reified T> T.loge(msg: String, tr: Throwable?) = Log.e(TAG, msg, tr)
+    inline fun <reified T, V> T.logd(data: V) = Log.d(TAG, data.toString())
 }

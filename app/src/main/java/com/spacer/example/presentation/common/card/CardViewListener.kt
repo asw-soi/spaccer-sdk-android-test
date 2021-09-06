@@ -1,4 +1,4 @@
-package com.spacer.example.common
+package com.spacer.example.presentation.common.card
 
 object CardViewListener {
     interface ISimpleCardViewListener {

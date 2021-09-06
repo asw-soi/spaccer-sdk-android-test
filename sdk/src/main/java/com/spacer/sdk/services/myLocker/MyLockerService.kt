@@ -13,26 +13,26 @@ class MyLockerService {
     fun get(token: String, callback: IResultCallback<List<MyLockerModel>>) {
         val mapper = MyLockerListResDataMapper()
 
-        api.myLocker.get().enqueue(callback, mapper)
+        api.myLocker.get(token).enqueue(callback, mapper)
     }
 
-    fun reserve(token: String, spacerId: String, callback: IResultCallback<MyLockerModel?>) {
+    fun reserve(token: String, spacerId: String, callback: IResultCallback<MyLockerModel>) {
         val params = MyLockerReserveReqData(spacerId)
         val mapper = MyLockerReserveResDataMapper()
 
-        api.myLocker.reserve(params).enqueue(callback, mapper)
+        api.myLocker.reserve(token, params).enqueue(callback, mapper)
     }
 
     fun reserveCancel(token: String, spacerId: String, callback: ICallback) {
         val params = MyLockerReserveCancelReqData(spacerId)
 
-        api.myLocker.reserveCancel(params).enqueue(callback)
+        api.myLocker.reserveCancel(token, params).enqueue(callback)
     }
 
-    fun shareUrlKey(token: String, urlKey: String, callback: IResultCallback<MyLockerModel?>) {
+    fun shareUrlKey(token: String, urlKey: String, callback: IResultCallback<MyLockerModel>) {
         val params = MyLockerShareUrlKeyReqData(urlKey)
         val mapper = MyLockerShareUrlKeyResDataMapper()
 
-        api.myLocker.shareUrlKey(params).enqueue(callback, mapper)
+        api.myLocker.shareUrlKey(token, params).enqueue(callback, mapper)
     }
 }

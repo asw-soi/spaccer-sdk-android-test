@@ -17,12 +17,12 @@ class MyLockerModel(
 
 fun MyLockerResData.toModel() = MyLockerModel(id, isReserved, reservedAt, expiredAt, lockedAt, urlKey)
 
-class MyLockerReserveResDataMapper : IMapper<MyLockerReserveResData, MyLockerModel?> {
-    override fun map(source: MyLockerReserveResData) = source.myLocker?.toModel()
+class MyLockerReserveResDataMapper : IMapper<MyLockerReserveResData, MyLockerModel> {
+    override fun map(source: MyLockerReserveResData) = source.myLocker!!.toModel()
 }
 
-class MyLockerShareUrlKeyResDataMapper : IMapper<MyLockerShareUrlKeyResData, MyLockerModel?> {
-    override fun map(source: MyLockerShareUrlKeyResData) = source.myLocker?.toModel()
+class MyLockerShareUrlKeyResDataMapper : IMapper<MyLockerShareUrlKeyResData, MyLockerModel> {
+    override fun map(source: MyLockerShareUrlKeyResData) = source.myLocker!!.toModel()
 }
 
 class MyLockerListResDataMapper : IMapper<MyLockerGetResData, List<MyLockerModel>> {

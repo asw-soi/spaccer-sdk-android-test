@@ -7,18 +7,16 @@
 
         <variable
             name="viewModel"
-            type="com.spacer.example.common.CardViewModel" />
+            type="com.spacer.example.presentation.common.card.CardViewModel" />
 
         <variable
             name="listener"
-            type="com.spacer.example.common.CardViewListener.IInputCardViewListener" />
+            type="com.spacer.example.presentation.common.card.CardViewListener.IInputCardViewListener" />
     </data>
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -69,10 +67,11 @@
                 android:inputType="textPersonName"
                 android:text="@={viewModel.text}"
                 android:textSize="12sp"
-                app:resourceHint="@{viewModel.hintId}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/message" />
+                app:layout_constraintTop_toBottomOf="@+id/message"
+                app:resourceHint="@{viewModel.hintId}"
+                tools:ignore="LabelFor" />
 
             <Button
                 android:id="@+id/exec"
@@ -80,7 +79,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="20dp"
-                android:layout_marginBottom="20dp"
+                android:layout_marginBottom="10dp"
                 android:backgroundTint="@color/black"
                 android:onClick="@{() ->  listener.onClicked(viewModel.text)}"
                 android:text="@string/btn_exec"

@@ -10,18 +10,19 @@ import com.spacer.sdk.data.api.resData.key.KeyGetResData
 import com.spacer.sdk.data.api.resData.key.KeyGetResultResData
 import retrofit2.Call
 import retrofit2.http.Body
+import retrofit2.http.Header
 import retrofit2.http.POST
 
 interface IKeyAPI {
-    @POST("exApp/key/generate")
-    fun generate(@Body params: KeyGenerateReqData): Call<KeyGenerateResData>
+    @POST("key/generate")
+    fun generate(@Header(APIHeader.Token) token: String, @Body params: KeyGenerateReqData): Call<KeyGenerateResData>
 
-    @POST("exApp/key/generateResult")
-    fun generateResult(@Body params: KeyGenerateResultReqData): Call<KeyGenerateResultResData>
+    @POST("key/generateResult")
+    fun generateResult(@Header(APIHeader.Token) token: String, @Body params: KeyGenerateResultReqData): Call<KeyGenerateResultResData>
 
-    @POST("exApp/key/get")
-    fun get(@Body params: KeyGetReqData): Call<KeyGetResData>
+    @POST("key/get")
+    fun get(@Header(APIHeader.Token) token: String, @Body params: KeyGetReqData): Call<KeyGetResData>
 
-    @POST("exApp/key/getResult")
-    fun getResult(@Body params: KeyGetResultReqData): Call<KeyGetResultResData>
+    @POST("key/getResult")
+    fun getResult(@Header(APIHeader.Token) token: String, @Body params: KeyGetResultReqData): Call<KeyGetResultResData>
 }

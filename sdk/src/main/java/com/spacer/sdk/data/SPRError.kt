@@ -7,7 +7,7 @@ data class SPRError(
     val message: String
 ) : Serializable {
 
-    override fun toString() = "${code},$${message}"
+    override fun toString() = "${message} (${code})"
 
     companion object {
 

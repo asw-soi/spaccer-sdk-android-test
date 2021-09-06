@@ -67,10 +67,10 @@ open class CBLockerGattService {
                 return gatt.fail(SPRError.CBDiscoveringServicesFailed)
             }
 
-            val service = gatt.services.firstOrNull { it.uuid == CBLockerConst.ServiceUUID }
+            val service = gatt.services.firstOrNull { it.uuid == CBLockerConst.DeviceServiceUUID }
                 ?: return gatt.fail(SPRError.CBDiscoveringServicesFailed)
 
-            val characteristic = service.characteristics.firstOrNull { it.uuid == CBLockerConst.CharacteristicUUID }
+            val characteristic = service.characteristics.firstOrNull { it.uuid == CBLockerConst.DeviceCharacteristicUUID }
                 ?: return gatt.fail(SPRError.CBDiscoveringCharacteristicsFailed)
 
             if (needsFirstRead) {
@@ -112,7 +112,7 @@ open class CBLockerGattService {
             logd("onCharacteristicChanged")
         }
 
-        open fun onKeyGetting(characteristic: BluetoothGattCharacteristic, cbLocker: CBLockerModel, callback: IResultCallback<String>) {
+        open fun onKeyGet(characteristic: BluetoothGattCharacteristic, cbLocker: CBLockerModel, callback: IResultCallback<ByteArray>) {
             throw RuntimeException("not implementation!")
         }
 
@@ -121,16 +121,16 @@ open class CBLockerGattService {
         }
 
         private fun BluetoothGatt.getKeyAndWriteCharacteristic(characteristic: BluetoothGattCharacteristic, cbLocker: CBLockerModel) {
-            val callback = object : IResultCallback<String> {
-                override fun onSuccess(result: String) {
-                    characteristic.value = "${CBLockerConst.BLE_PUTIN_WRITE}, $result".toByteArray()
+            val callback = object : IResultCallback<ByteArray> {
+                override fun onSuccess(result: ByteArray) {
+                    characteristic.value = result
                     writeCharacteristic(characteristic)
                 }
 
                 override fun onFailure(error: SPRError) = fail(error)
             }
 
-            onKeyGetting(characteristic, cbLocker, callback)
+            onKeyGet(characteristic, cbLocker, callback)
         }
 
         private fun BluetoothGatt.finish(characteristic: BluetoothGattCharacteristic, cbLocker: CBLockerModel) {

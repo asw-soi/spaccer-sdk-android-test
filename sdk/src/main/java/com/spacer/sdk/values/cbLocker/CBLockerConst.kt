@@ -5,17 +5,18 @@ import java.util.*
 
 class CBLockerConst {
     companion object {
-        private const val BLE_RW_SUCCESS_STATE  = "rwsuccess"
-        private const val BLE_W_SUCCESS_STATE  = "wsuccess"
-        private const val BLE_USING_STATE  = "using"
+        private const val DEVICE_RW_SUCCESS_STATE  = "rwsuccess"
+        private const val DEVICE_W_SUCCESS_STATE  = "wsuccess"
+        private const val DEVICE_USING_STATE  = "using"
 
-        const val BLE_PUTIN_WRITE = "543214723567xxxrw"
-        const val BLE_TAKEOUT_WRITE = "543214723567xxxw"
+        const val DEVICE_PUT_PREFIXE = "543214723567xxxrw"
+        const val DEVICE_TAKE_PREFIXE = "543214723567xxxw"
+
         val ScanMills = SPR.config.scanMills
 
-        val BleCanNotPutinStateList  = arrayOf(BLE_RW_SUCCESS_STATE, BLE_W_SUCCESS_STATE, BLE_USING_STATE)
-        val ServiceUUID = UUID.fromString("0000ff10-0000-1000-8000-00805f9b34fb")!!
-        val CharacteristicUUID = UUID.fromString("0000ff11-0000-1000-8000-00805f9b34fb")!!
+        val DeviceCanNotPutinStateList  = arrayOf(DEVICE_RW_SUCCESS_STATE, DEVICE_W_SUCCESS_STATE, DEVICE_USING_STATE)
+        val DeviceServiceUUID = UUID.fromString("0000ff10-0000-1000-8000-00805f9b34fb")!!
+        val DeviceCharacteristicUUID = UUID.fromString("0000ff11-0000-1000-8000-00805f9b34fb")!!
 
     }
 }

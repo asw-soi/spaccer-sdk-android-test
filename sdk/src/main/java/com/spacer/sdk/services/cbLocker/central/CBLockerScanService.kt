@@ -32,13 +32,13 @@ open class CBLockerScanService {
     protected open fun startScan(context: Context, scanCallback: CBLockerScanCallback) {
         logd("startScan")
 
-        if (bluetoothAdapter.isDisabled) {
-            return scanCallback.onFailure(SPRError.CBScanDisabled)
-        }
-
         this.context = context
         this.scanCallback = scanCallback
         this.scanHandler = Handler(Looper.getMainLooper())
+
+        if (bluetoothAdapter.isDisabled) {
+            return scanCallback.onFailure(SPRError.CBScanDisabled)
+        }
 
         val scanFilters = buildScanFilters()
         val scanSettings = buildScanSettings()
@@ -87,7 +87,7 @@ open class CBLockerScanService {
     private fun buildScanFilters(): List<ScanFilter> {
         val scanFilters: MutableList<ScanFilter> = ArrayList()
         val builder = ScanFilter.Builder()
-        builder.setServiceUuid(ParcelUuid(CBLockerConst.ServiceUUID))
+        builder.setServiceUuid(ParcelUuid(CBLockerConst.DeviceServiceUUID))
         scanFilters.add(builder.build())
 
         return scanFilters

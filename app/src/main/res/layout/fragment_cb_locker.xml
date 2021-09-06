@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:tools="http://schemas.android.com/tools"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="viewModel"
-            type="com.spacer.example.cbLocker.CBLockerViewModel" />
+            type="com.spacer.example.presentation.cbLocker.CBLockerViewModel" />
+
         <variable
             name="listener"
-            type="com.spacer.example.cbLocker.CBLockerListener" />
+            type="com.spacer.example.presentation.cbLocker.CBLockerListener" />
     </data>
 
     <ScrollView
@@ -22,40 +24,57 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#DBDBDB"
             android:orientation="vertical">
 
             <include
-                layout="@layout/view_card_simple"
+                layout="@layout/view_header"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                app:listener="@{listener.scan}"
-                app:viewModel="@{viewModel.scan}" />
+                app:viewModel="@{viewModel.header}" />
 
-            <include
-                layout="@layout/view_card_input"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                app:listener="@{listener.put}"
-                app:viewModel="@{viewModel.put}" />
+                android:background="#DBDBDB"
+                android:orientation="vertical"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:paddingBottom="10dp">
 
-            <include
-                layout="@layout/view_card_input"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                app:listener="@{listener.take}"
-                app:viewModel="@{viewModel.take}" />
+                <include
+                    layout="@layout/view_card_simple"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    app:listener="@{listener.scan}"
+                    app:viewModel="@{viewModel.scan}" />
 
-            <include
-                layout="@layout/view_card_input"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                app:listener="@{listener.takeUrlKey}"
-                app:viewModel="@{viewModel.takeUrlKey}" />
+                <include
+                    layout="@layout/view_card_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    app:listener="@{listener.put}"
+                    app:viewModel="@{viewModel.put}" />
+
+                <include
+                    layout="@layout/view_card_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    app:listener="@{listener.take}"
+                    app:viewModel="@{viewModel.take}" />
+
+                <include
+                    layout="@layout/view_card_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    app:listener="@{listener.takeUrlKey}"
+                    app:viewModel="@{viewModel.takeUrlKey}" />
+
+
+            </LinearLayout>
 
         </LinearLayout>
 

@@ -1,12 +1,12 @@
-package com.spacer.example.cbLocker
+package com.spacer.example.presentation.cbLocker
 
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.spacer.example.R
-import com.spacer.example.common.CardViewModel
+import com.spacer.example.presentation.common.card.CardViewModel
+import com.spacer.example.presentation.common.header.HeaderViewModel
 
 class CBLockerViewModel : ViewModel() {
-    val titleId = R.string.cb_title
+    val header = HeaderViewModel().apply { init(R.string.cb_title) }
     val scan = CardViewModel().apply { init(R.string.cb_scan_title, R.string.cb_scan_desc) }
     var put = CardViewModel().apply { init(R.string.cb_put_title, R.string.cb_put_desc, R.string.cb_put_hint) }
     var take = CardViewModel().apply { init(R.string.cb_take_title, R.string.cb_take_desc, R.string.cb_take_hint) }

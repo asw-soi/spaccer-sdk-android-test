@@ -1,24 +1,21 @@
-package com.spacer.example.main
+package com.spacer.example.presentation.main
 
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.MotionEvent
+import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import com.spacer.sdk.SPR
-import com.spacer.sdk.data.IResultCallback
 import com.spacer.sdk.data.SPRConfig
-import com.spacer.sdk.data.extensions.LoggerExtensions.TAG
-import com.spacer.sdk.models.myLocker.MyLockerModel
-import com.spacer.sdk.models.sprLocker.SPRLockerModel
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.spacer.example.R
 import com.spacer.example.databinding.ActivityMainBinding
+import com.spacer.example.presentation.common.PermissionRequester
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -31,6 +28,8 @@ class MainActivity : AppCompatActivity() {
 
         initDataBinding()
         initNavController()
+
+        PermissionRequester(this).run()
 
         configure()
 //        getSPRLockers()
@@ -58,24 +57,19 @@ class MainActivity : AppCompatActivity() {
         SPR.configure(config)
     }
 
-    private fun getSPRLockers(){
-        val callback = object : IResultCallback<List<SPRLockerModel>> {
-            override fun onSuccess(result: List<SPRLockerModel>) {
-                Log.d(TAG, result.joinToString("\n"))
-            }
-        }
+    fun startLoading(option: LoadingOption) {
+        val isOverlay = option == LoadingOption.Overlay
+        val isNotTouchable = option == LoadingOption.Overlay || option == LoadingOption.ScreenLock
 
-        val aa = SPR.sprLockerService().getLockers(token, listOf("SPACER055"), callback)
+        viewModel.progressBar.enable(isOverlay)
+        if (isNotTouchable) {
+            window.addFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
+        }
     }
 
-    private fun getMyLockers(){
-        val callback = object : IResultCallback<List<MyLockerModel>> {
-            override fun onSuccess(result: List<MyLockerModel>) {
-                Log.d(TAG, result.joinToString("\n"))
-            }
-        }
-
-        val aa = SPR.myLockerService().get(token, callback)
+    fun stopLoading() {
+        viewModel.progressBar.disable()
+        window.clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
     }
 
     override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {
@@ -85,4 +79,11 @@ class MainActivity : AppCompatActivity() {
         }
         return super.dispatchTouchEvent(ev)
     }
+}
+
+
+enum class LoadingOption {
+    Overlay,
+    ScreenLock,
+    NotScreenLock,
 }

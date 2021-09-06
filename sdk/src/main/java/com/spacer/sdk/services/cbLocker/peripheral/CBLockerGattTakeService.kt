@@ -9,9 +9,11 @@ import com.spacer.sdk.data.SPRError
 import com.spacer.sdk.data.api.api
 import com.spacer.sdk.data.api.reqData.key.KeyGetReqData
 import com.spacer.sdk.data.api.reqData.key.KeyGetResultReqData
+import com.spacer.sdk.data.api.resData.key.KeyGenerateResData
 import com.spacer.sdk.data.api.resData.key.KeyGetResData
 import com.spacer.sdk.data.extensions.RetrofitCallExtensions.enqueue
 import com.spacer.sdk.models.cbLocker.CBLockerModel
+import com.spacer.sdk.values.cbLocker.CBLockerConst
 
 class CBLockerGattTakeService : CBLockerGattService() {
     private lateinit var token: String
@@ -26,17 +28,17 @@ class CBLockerGattTakeService : CBLockerGattService() {
     }
 
     private open inner class CBLockerGattTakeCallback : CBLockerGattCallback() {
-        override fun onKeyGetting(characteristic: BluetoothGattCharacteristic, cbLocker: CBLockerModel, callback: IResultCallback<String>) {
+        override fun onKeyGet(characteristic: BluetoothGattCharacteristic, cbLocker: CBLockerModel, callback: IResultCallback<ByteArray>) {
             val params = KeyGetReqData(spacerId)
-            val mapper = object : IMapper<KeyGetResData, String> {
-                override fun map(source: KeyGetResData) = source.key ?: ""
+            val mapper = object : IMapper<KeyGetResData, ByteArray> {
+                override fun map(source: KeyGetResData) = "${CBLockerConst.DEVICE_TAKE_PREFIXE}, ${source.key}".toByteArray()
             }
-            api.key.get(params).enqueue(callback, mapper)
+            api.key.get(token, params).enqueue(callback, mapper)
         }
 
         override fun onFinished(characteristic: BluetoothGattCharacteristic, cbLocker: CBLockerModel, callback: ICallback) {
             val params = KeyGetResultReqData(spacerId, characteristic.readData())
-            api.key.getResult(params).enqueue(callback)
+            api.key.getResult(token, params).enqueue(callback)
         }
 
         override fun onSuccess() = callback.onSuccess()

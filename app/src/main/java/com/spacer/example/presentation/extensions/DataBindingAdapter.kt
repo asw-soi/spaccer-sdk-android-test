@@ -1,14 +1,7 @@
-package com.spacer.example.extensions
+package com.spacer.example.presentation.extensions
 
-import android.content.Context
-import android.view.MotionEvent
 import android.view.View
-import android.view.ViewGroup
-import android.view.inputmethod.InputMethodManager
-import android.widget.EditText
-import android.widget.ImageView
 import android.widget.TextView
-import androidx.core.text.HtmlCompat
 import androidx.databinding.BindingAdapter
 
 

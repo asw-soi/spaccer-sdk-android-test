@@ -20,12 +20,12 @@ class CBLockerScanConnectService : CBLockerScanService() {
         super.startScan(context, scanCallback)
     }
 
-    fun put(context: Context, spacerId: String, callback: ICallback) {
+    fun put(token: String, context: Context, spacerId: String, callback: ICallback) {
         scan(
             context,
             spacerId,
             object : IResultCallback<CBLockerModel> {
-                override fun onSuccess(result: CBLockerModel) = CBLockerGattPutService().connect(context, result, callback)
+                override fun onSuccess(result: CBLockerModel) = CBLockerGattPutService().connect(token, context, result, callback)
                 override fun onFailure(error: SPRError) = callback.onFailure(error)
             }
         )

@@ -6,7 +6,7 @@
 
         <variable
             name="viewModel"
-            type="com.spacer.example.common.ProgressBarViewModel" />
+            type="com.spacer.example.presentation.common.progress.ProgressBarViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

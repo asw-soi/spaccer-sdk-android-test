@@ -12,11 +12,14 @@ import com.spacer.sdk.data.api.reqData.key.KeyGenerateResultReqData
 import com.spacer.sdk.data.api.resData.key.KeyGenerateResData
 import com.spacer.sdk.data.extensions.RetrofitCallExtensions.enqueue
 import com.spacer.sdk.models.cbLocker.CBLockerModel
+import com.spacer.sdk.values.cbLocker.CBLockerConst
 
 class CBLockerGattPutService : CBLockerGattService() {
+    private lateinit var token: String
     private lateinit var callback: ICallback
 
-    fun connect(context: Context, cbLocker: CBLockerModel, callback: ICallback) {
+    fun connect(token: String, context: Context, cbLocker: CBLockerModel, callback: ICallback) {
+        this.token = token
         this.callback = callback
 
         val gattCallback = CBLockerGattPutCallback()
@@ -24,17 +27,17 @@ class CBLockerGattPutService : CBLockerGattService() {
     }
 
     private open inner class CBLockerGattPutCallback : CBLockerGattCallback() {
-        override fun onKeyGetting(characteristic: BluetoothGattCharacteristic, cbLocker: CBLockerModel, callback: IResultCallback<String>) {
+        override fun onKeyGet(characteristic: BluetoothGattCharacteristic, cbLocker: CBLockerModel, callback: IResultCallback<ByteArray>) {
             val params = KeyGenerateReqData(spacerId, characteristic.readData())
-            val mapper = object : IMapper<KeyGenerateResData, String> {
-                override fun map(source: KeyGenerateResData) = source.key ?: ""
+            val mapper = object : IMapper<KeyGenerateResData, ByteArray> {
+                override fun map(source: KeyGenerateResData) = "${CBLockerConst.DEVICE_PUT_PREFIXE}, ${source.key}".toByteArray()
             }
-            api.key.generate(params).enqueue(callback, mapper)
+            api.key.generate(token, params).enqueue(callback, mapper)
         }
 
         override fun onFinished(characteristic: BluetoothGattCharacteristic, cbLocker: CBLockerModel, callback: ICallback) {
             val params = KeyGenerateResultReqData(spacerId, characteristic.readData())
-            api.key.generateResult(params).enqueue(callback)
+            api.key.generateResult(token, params).enqueue(callback)
         }
 
         override fun onSuccess() = callback.onSuccess()
