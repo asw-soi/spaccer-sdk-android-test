@@ -1,7 +1,5 @@
 package com.spacer.sdk.models.cbLocker
 
-import com.spacer.sdk.data.IMapper
-import com.spacer.sdk.data.api.resData.myLocker.*
 import com.spacer.sdk.values.cbLocker.CBLockerGattStatus
 
 class CBLockerModel(
@@ -20,4 +18,3 @@ class CBLockerModel(
         this.status = CBLockerGattStatus.None
     }
 }
-

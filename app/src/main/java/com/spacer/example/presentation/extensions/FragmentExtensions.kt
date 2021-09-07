@@ -1,18 +1,13 @@
 package com.spacer.example.presentation.extensions
 
 import android.app.AlertDialog
-import android.content.Intent
-import android.net.Uri
-import android.view.View
-import android.widget.TextView
-import androidx.databinding.BindingAdapter
+import android.content.DialogInterface
 import androidx.fragment.app.Fragment
 import com.spacer.example.R
 import com.spacer.example.presentation.common.dialog.DialogMessage
-import com.spacer.example.presentation.main.LoadingOption
+import com.spacer.example.presentation.common.progress.LoadingOption
 import com.spacer.example.presentation.main.MainActivity
 import com.spacer.sdk.data.SPRError
-
 
 object FragmentExtensions {
     private val Fragment.mainActivity get() = activity as? MainActivity

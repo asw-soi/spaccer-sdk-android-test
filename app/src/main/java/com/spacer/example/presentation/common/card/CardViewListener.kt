@@ -1,11 +1,9 @@
 package com.spacer.example.presentation.common.card
 
-object CardViewListener {
-    interface ISimpleCardViewListener {
-        fun onClicked()
-    }
+interface ICardSimpleViewListener {
+    fun onClicked()
+}
 
-    interface IInputCardViewListener {
-        fun onClicked(text: String)
-    }
+interface ICardInputViewListener {
+    fun onClicked(text: String)
 }

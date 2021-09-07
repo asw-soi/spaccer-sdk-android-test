@@ -25,7 +25,7 @@ class PermissionRequester(private val activity: Activity) {
         const val REQUEST_CODE = 1001
         val permissionNames = mapOf(
             Manifest.permission.BLUETOOTH to "Bluetooth",
-            Manifest.permission.ACCESS_FINE_LOCATION to "位置情報"
+            Manifest.permission.ACCESS_FINE_LOCATION to "Location"
         )
     }
 }

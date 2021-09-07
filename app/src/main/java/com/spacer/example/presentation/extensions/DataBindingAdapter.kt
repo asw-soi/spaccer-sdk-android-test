@@ -1,9 +1,10 @@
 package com.spacer.example.presentation.extensions
 
 import android.view.View
+import android.widget.Button
+import android.widget.EditText
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
-
 
 object DataBindingAdapter {
     @JvmStatic
@@ -21,10 +22,16 @@ object DataBindingAdapter {
     }
 
     @JvmStatic
+    @BindingAdapter("enabledByValue")
+    fun Button.setEnabledByValue(value: String?) {
+        this.isEnabled = (value != null) then true ?: false
+    }
+
+    @JvmStatic
     @BindingAdapter("visibleOrGone")
     fun View.setVisibleOrGone(value: Boolean?) {
         this.visibility = (value == true) then View.VISIBLE ?: View.GONE
     }
 
-    infix fun <T> Boolean.then(other: T) = if (this) other else null
+    private infix fun <T> Boolean.then(other: T) = if (this) other else null
 }

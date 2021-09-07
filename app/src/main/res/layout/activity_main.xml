@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="viewModel"
             type="com.spacer.example.presentation.main.MainViewModel" />
@@ -40,14 +41,14 @@
             app:menu="@menu/navigation_menu" />
 
         <include
-            layout="@layout/view_progress_bar"
+            layout="@layout/view_progress"
             android:layout_width="0dp"
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:viewModel="@={viewModel.progressBar}" />
+            app:viewModel="@={viewModel.progress}" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

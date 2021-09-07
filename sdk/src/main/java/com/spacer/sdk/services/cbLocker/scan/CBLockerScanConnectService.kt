@@ -1,12 +1,12 @@
-package com.spacer.sdk.services.cbLocker.central
+package com.spacer.sdk.services.cbLocker.scan
 
 import android.content.Context
 import com.spacer.sdk.data.ICallback
 import com.spacer.sdk.data.IResultCallback
 import com.spacer.sdk.data.SPRError
 import com.spacer.sdk.models.cbLocker.CBLockerModel
-import com.spacer.sdk.services.cbLocker.peripheral.CBLockerGattPutService
-import com.spacer.sdk.services.cbLocker.peripheral.CBLockerGattTakeService
+import com.spacer.sdk.services.cbLocker.gatt.CBLockerGattPutService
+import com.spacer.sdk.services.cbLocker.gatt.CBLockerGattTakeService
 
 class CBLockerScanConnectService : CBLockerScanService() {
     private lateinit var spacerId: String
@@ -20,23 +20,23 @@ class CBLockerScanConnectService : CBLockerScanService() {
         super.startScan(context, scanCallback)
     }
 
-    fun put(token: String, context: Context, spacerId: String, callback: ICallback) {
+    fun put(context: Context, token: String, spacerId: String, callback: ICallback) {
         scan(
             context,
             spacerId,
             object : IResultCallback<CBLockerModel> {
-                override fun onSuccess(result: CBLockerModel) = CBLockerGattPutService().connect(token, context, result, callback)
+                override fun onSuccess(result: CBLockerModel) = CBLockerGattPutService().connect(context, token, result, callback)
                 override fun onFailure(error: SPRError) = callback.onFailure(error)
             }
         )
     }
 
-    fun take(token: String, context: Context, spacerId: String, callback: ICallback) {
+    fun take(context: Context, token: String, spacerId: String, callback: ICallback) {
         scan(
             context,
             spacerId,
             object : IResultCallback<CBLockerModel> {
-                override fun onSuccess(result: CBLockerModel) = CBLockerGattTakeService().connect(token, context, result, callback)
+                override fun onSuccess(result: CBLockerModel) = CBLockerGattTakeService().connect(context, token, result, callback)
                 override fun onFailure(error: SPRError) = callback.onFailure(error)
             }
         )
@@ -50,6 +50,11 @@ class CBLockerScanConnectService : CBLockerScanService() {
             }
         }
 
-        override fun onDelayed(): Boolean = true
+        override fun onDelayed(): Boolean {
+            if (isScanning) {
+                callback.onFailure(SPRError.CBScanDeviceNotFound)
+            }
+            return true
+        }
     }
 }

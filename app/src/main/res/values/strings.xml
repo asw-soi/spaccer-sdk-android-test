@@ -7,8 +7,8 @@
 
     <string name="btn_exec">exec</string>
 
-    <string name="success_title">Processing was successful</string>
-    <string name="error_title">An error has occurred</string>
+    <string name="success_title">processing was successful</string>
+    <string name="error_title">an error has occurred</string>
 
     <string name="cb_title">CB Locker Service</string>
     <string name="my_title">My Locker Service</string>

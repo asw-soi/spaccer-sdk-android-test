@@ -1,12 +1,8 @@
 package com.spacer.sdk.models.sprLocker
 
 import com.spacer.sdk.data.IMapper
-import com.spacer.sdk.data.api.resData.sprLocker.SPRLockerGetResData
-import com.spacer.sdk.data.api.resData.sprLocker.SPRLockerResData
 import com.spacer.sdk.data.api.resData.sprLocker.SPRLockerUnitGetResData
 import com.spacer.sdk.data.api.resData.sprLocker.SPRLockerUnitResData
-import com.spacer.sdk.data.extensions.EnumExtensions.safeValueOf
-import com.spacer.sdk.values.sprLocker.SPRLockerStatus
 
 class SPRLockerUnitModel(
     val id: String,
@@ -16,7 +12,7 @@ class SPRLockerUnitModel(
     val spacers: List<SPRLockerModel>?,
 ) {
     override fun toString(): String {
-        val spacersText = spacers?.map { it.toString() }?.joinToString("\n")
+        val spacersText = spacers?.joinToString("\n") { it.toString() }
         return "id:${id},open:${open},close:${close},address:${address},spacers:\n${spacersText}"
     }
 }

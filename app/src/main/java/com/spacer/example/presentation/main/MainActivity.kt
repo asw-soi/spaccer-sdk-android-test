@@ -16,13 +16,14 @@ import androidx.navigation.ui.setupWithNavController
 import com.spacer.example.R
 import com.spacer.example.databinding.ActivityMainBinding
 import com.spacer.example.presentation.common.PermissionRequester
+import com.spacer.example.presentation.common.progress.LoadingOption
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private val viewModel by lazy { ViewModelProvider(this).get(MainViewModel::class.java) }
     private lateinit var navController: NavController
-    
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -31,9 +32,7 @@ class MainActivity : AppCompatActivity() {
 
         PermissionRequester(this).run()
 
-        configure()
-//        getSPRLockers()
-//        getMyLockers()
+        configureSDK()
     }
 
     private fun initDataBinding() {
@@ -46,12 +45,8 @@ class MainActivity : AppCompatActivity() {
         navController = findNavController(R.id.container)
         bottom_navigation.setupWithNavController(navController)
     }
-    
 
-    private val token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcGlLZXlJZCI6InA0Tmwwa1NhY1hWbnRlbUhnWk1hSFpyMXAyMlhSVExmaDNtYjd5TSIsInVzZXJJZCI6Ii1NX2NWNzY0Q2RwaUVCdTVQRW40IiwiaWF0IjoxNjMwMzgwMDcyLCJleHAiOjE2MzE1ODk2NzJ9.gq9I0xOCswnvLpCqTNyCrd03ukbFWyawiDOFjGkNYUA"
-
-    private fun configure(){
-
+    private fun configureSDK() {
         val config = SPRConfig(baseURL = "http://120.143.1.101:8008/exApp")
 //        val config = SPRConfig(baseURL = "https://api-vsv0ukl18tz6dm.spacer.co.jp")
         SPR.configure(config)
@@ -61,14 +56,14 @@ class MainActivity : AppCompatActivity() {
         val isOverlay = option == LoadingOption.Overlay
         val isNotTouchable = option == LoadingOption.Overlay || option == LoadingOption.ScreenLock
 
-        viewModel.progressBar.enable(isOverlay)
+        viewModel.progress.enable(isOverlay)
         if (isNotTouchable) {
             window.addFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
         }
     }
 
     fun stopLoading() {
-        viewModel.progressBar.disable()
+        viewModel.progress.disable()
         window.clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
     }
 
@@ -79,11 +74,4 @@ class MainActivity : AppCompatActivity() {
         }
         return super.dispatchTouchEvent(ev)
     }
-}
-
-
-enum class LoadingOption {
-    Overlay,
-    ScreenLock,
-    NotScreenLock,
 }

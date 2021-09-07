@@ -37,13 +37,11 @@ class APIClient {
         .addInterceptor(requestInterceptor)
         .addInterceptor(loggingInterceptor)
 
-
     private val retrofit = Retrofit.Builder()
         .baseUrl("${APIConst.BaseURL}/")
         .addConverterFactory(GsonConverterFactory.create())
         .client(httpBuilder.build())
         .build()
-
 
     val key: IKeyAPI by lazy { retrofit.create(IKeyAPI::class.java) }
     val myLocker: IMyLockerAPI by lazy { retrofit.create(IMyLockerAPI::class.java) }

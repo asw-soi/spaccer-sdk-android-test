@@ -1,4 +1,4 @@
-package com.spacer.sdk.services.cbLocker.peripheral
+package com.spacer.sdk.services.cbLocker.gatt
 
 import android.bluetooth.*
 import android.content.Context
@@ -18,7 +18,7 @@ class CBLockerGattPutService : CBLockerGattService() {
     private lateinit var token: String
     private lateinit var callback: ICallback
 
-    fun connect(token: String, context: Context, cbLocker: CBLockerModel, callback: ICallback) {
+    fun connect(context: Context, token: String, cbLocker: CBLockerModel, callback: ICallback) {
         this.token = token
         this.callback = callback
 
@@ -30,7 +30,7 @@ class CBLockerGattPutService : CBLockerGattService() {
         override fun onKeyGet(characteristic: BluetoothGattCharacteristic, cbLocker: CBLockerModel, callback: IResultCallback<ByteArray>) {
             val params = KeyGenerateReqData(spacerId, characteristic.readData())
             val mapper = object : IMapper<KeyGenerateResData, ByteArray> {
-                override fun map(source: KeyGenerateResData) = "${CBLockerConst.DEVICE_PUT_PREFIXE}, ${source.key}".toByteArray()
+                override fun map(source: KeyGenerateResData) = "${CBLockerConst.DEVICE_PUT_PREFIX}, ${source.key}".toByteArray()
             }
             api.key.generate(token, params).enqueue(callback, mapper)
         }

@@ -1,18 +1,14 @@
-package com.spacer.sdk.services.cbLocker.peripheral
+package com.spacer.sdk.services.cbLocker.gatt
 
 import android.bluetooth.*
 import android.content.Context
 import com.spacer.sdk.data.ICallback
-import com.spacer.sdk.data.IFailureCallback
 import com.spacer.sdk.data.IResultCallback
 import com.spacer.sdk.data.SPRError
 import com.spacer.sdk.data.extensions.LoggerExtensions.logd
 import com.spacer.sdk.models.cbLocker.CBLockerModel
-import com.spacer.sdk.models.myLocker.*
 import com.spacer.sdk.values.cbLocker.CBLockerConst
 import com.spacer.sdk.values.cbLocker.CBLockerGattStatus
-import java.util.*
-
 
 open class CBLockerGattService {
     private lateinit var context: Context

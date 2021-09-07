@@ -1,15 +1,12 @@
 package com.spacer.example.presentation.main
 
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.spacer.example.presentation.common.progress.ProgressBarViewModel
+import com.spacer.example.presentation.common.progress.ProgressViewModel
 
 class MainViewModel : ViewModel() {
-    val tabVisible = MutableLiveData<Boolean>()
-    var progressBar = ProgressBarViewModel()
+    var progress = ProgressViewModel()
 
     init {
-        tabVisible.value = true
-        progressBar.isOverlay.value = false
+        progress.isOverlay.value = false
     }
 }

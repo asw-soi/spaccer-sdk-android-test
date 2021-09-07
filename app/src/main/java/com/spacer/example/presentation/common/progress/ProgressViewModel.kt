@@ -3,7 +3,7 @@ package com.spacer.example.presentation.common.progress
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class ProgressBarViewModel : ViewModel() {
+class ProgressViewModel : ViewModel() {
     val isLoading = MutableLiveData<Boolean>()
     val isOverlay = MutableLiveData<Boolean>()
 
@@ -23,4 +23,9 @@ class ProgressBarViewModel : ViewModel() {
         isLoading.value = false
         isOverlay.value = false
     }
+}
+
+enum class LoadingOption {
+    Overlay,
+    ScreenLock,
 }

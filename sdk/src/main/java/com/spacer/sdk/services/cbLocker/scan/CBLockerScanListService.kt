@@ -1,4 +1,4 @@
-package com.spacer.sdk.services.cbLocker.central
+package com.spacer.sdk.services.cbLocker.scan
 
 import android.content.Context
 import com.spacer.sdk.data.IResultCallback
@@ -7,13 +7,12 @@ import com.spacer.sdk.models.cbLocker.CBLockerModel
 import com.spacer.sdk.models.sprLocker.SPRLockerModel
 import com.spacer.sdk.services.sprLocker.SPRLockerService
 
-
 class CBLockerScanListService : CBLockerScanService() {
     private lateinit var token: String
     private lateinit var callback: IResultCallback<List<SPRLockerModel>>
     private var scanningList: MutableList<CBLockerModel> = mutableListOf()
 
-    fun scan(token: String, context: Context, callback: IResultCallback<List<SPRLockerModel>>) {
+    fun scan(context: Context, token: String, callback: IResultCallback<List<SPRLockerModel>>) {
         this.token = token
         this.callback = callback
 

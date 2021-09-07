@@ -9,9 +9,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.spacer.example.R
 import com.spacer.example.databinding.FragmentMyLockerBinding
-import com.spacer.example.presentation.cbLocker.CBLockerListener
-import com.spacer.example.presentation.cbLocker.CBLockerViewModel
-
 
 class MyLockerFragment : Fragment() {
     private lateinit var binding: FragmentMyLockerBinding

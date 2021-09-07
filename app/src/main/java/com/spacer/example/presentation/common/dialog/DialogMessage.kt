@@ -1,30 +1,30 @@
+
+
 package com.spacer.example.presentation.common.dialog
 
-import android.Manifest
-import android.app.Activity
-import android.content.pm.PackageManager
-import android.util.Log
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
-import androidx.fragment.app.Fragment
+import android.annotation.SuppressLint
 import com.spacer.example.Application
 import com.spacer.example.R
-import com.spacer.example.presentation.extensions.FragmentExtensions.showErrorDialog
-import com.spacer.example.presentation.extensions.FragmentExtensions.showSuccessDialog
-import com.spacer.example.presentation.extensions.FragmentExtensions.startLoading
-import com.spacer.example.presentation.extensions.FragmentExtensions.stopLoading
-import com.spacer.sdk.data.ICallback
-import com.spacer.sdk.data.IResultCallback
-import com.spacer.sdk.data.SPRError
-import com.spacer.sdk.data.extensions.LoggerExtensions.logd
-import com.spacer.sdk.models.sprLocker.SPRLockerModel
 
-class DialogMessage(val titleId: Int, val bodyId: Int) {
+@SuppressLint("StaticFieldLeak")
+class DialogMessage(titleId: Int, bodyId: Int) {
+
     private val context = Application.context
+
+    var title: String
+    var body: String
+
+    init {
+        this.title = context.getString(titleId)
+        this.body = context.getString(bodyId)
+    }
+
     override fun toString() = "${title},${body}"
 
-    val title get() = context.getString(titleId)
-    val body get() = context.getString(bodyId)
+    fun append(body: String): DialogMessage {
+        this.body = "${this.body}\n${body}"
+        return this
+    }
 
     companion object {
         val CbLockerScanSuccess = DialogMessage(R.string.success_title, R.string.cb_scan_success_message)

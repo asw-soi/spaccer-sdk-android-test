@@ -1,3 +1,5 @@
+@file:Suppress("unused", "unused")
+
 package com.spacer.sdk.data.extensions
 
 import com.spacer.sdk.data.*
@@ -10,7 +12,6 @@ import retrofit2.Callback
 import retrofit2.Response
 
 object CallbackExtensions {
-
     inline fun <reified T : IResData> ICallback.toRetrofitCallback(): Callback<T> {
         val self = this
         return object : Callback<T> {
@@ -59,7 +60,7 @@ object CallbackExtensions {
 
     inline fun <reified T : IResData> Response<T>.tryFindError(): SPRError? {
         if (isSuccessful) {
-            val body = body() ?: return SPRError.ApiBodyFailed
+            val body = body() ?: return SPRError.ApiBodyEmpty
             return body.error?.toSPRError()
         } else {
             return SPRError.ApiFailed

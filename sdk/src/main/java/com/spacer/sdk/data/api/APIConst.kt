@@ -13,5 +13,3 @@ class APIHeader {
         const val Token = "X-Spacer-ExApp-Token"
     }
 }
-
-

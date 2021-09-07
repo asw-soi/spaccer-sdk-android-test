@@ -1,4 +1,4 @@
-package com.spacer.sdk.services.cbLocker.central
+package com.spacer.sdk.services.cbLocker.scan
 
 import android.bluetooth.BluetoothAdapter
 import android.bluetooth.BluetoothManager
@@ -27,7 +27,7 @@ open class CBLockerScanService {
     private val BluetoothAdapter.isDisabled get() = !isEnabled
 
     private var scanningCnt = 0
-    private var isScanning = false
+    protected var isScanning = false
 
     protected open fun startScan(context: Context, scanCallback: CBLockerScanCallback) {
         logd("startScan")
@@ -57,10 +57,9 @@ open class CBLockerScanService {
                 scanningCnt++
                 logd("scanningCnt: $scanningCnt")
 
-                val isExecuted = scanCallback.onDelayed()
-                if (isExecuted) {
-                    stopScan()
-                    return
+                val isFinished = scanCallback.onDelayed()
+                if (isFinished) {
+                    return stopScan()
                 }
 
                 if (scanningCnt > MaxScanningCnt) {

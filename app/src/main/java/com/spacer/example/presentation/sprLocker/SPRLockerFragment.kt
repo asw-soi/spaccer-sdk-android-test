@@ -10,7 +10,6 @@ import androidx.lifecycle.ViewModelProvider
 import com.spacer.example.R
 import com.spacer.example.databinding.FragmentSprLockerBinding
 
-
 class SPRLockerFragment : Fragment() {
     private lateinit var binding: FragmentSprLockerBinding
     private val viewModel by lazy { ViewModelProvider(this).get(SPRLockerViewModel::class.java) }

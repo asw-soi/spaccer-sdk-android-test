@@ -4,5 +4,5 @@ import java.io.Serializable
 
 data class ErrorResData(
     val code: String,
-    val message: String
-): Serializable
+    val message: String,
+) : Serializable
