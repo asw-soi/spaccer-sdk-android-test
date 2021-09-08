@@ -19,10 +19,7 @@ android {
         properties.load(project.rootProject.file('local.properties').newDataInputStream())
 
         def SDK_TOKEN = properties.getProperty("sdk.token")
-        def SDK_URL = properties.getProperty("sdk.url")
-
         buildConfigField("String", "SDK_TOKEN", "\"${SDK_TOKEN}\"")
-        buildConfigField("String", "SDK_URL", "\"${SDK_URL}\"")
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
