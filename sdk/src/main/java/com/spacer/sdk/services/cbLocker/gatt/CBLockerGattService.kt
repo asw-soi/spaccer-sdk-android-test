@@ -60,14 +60,14 @@ open class CBLockerGattService {
 
         override fun onServicesDiscovered(gatt: BluetoothGatt, status: Int) {
             if (status != BluetoothGatt.GATT_SUCCESS) {
-                return gatt.fail(SPRError.CBDiscoveringServicesFailed)
+                return gatt.fail(SPRError.CBServiceNotFound)
             }
 
             val service = gatt.services.firstOrNull { it.uuid == CBLockerConst.DeviceServiceUUID }
-                ?: return gatt.fail(SPRError.CBDiscoveringServicesFailed)
+                ?: return gatt.fail(SPRError.CBServiceNotFound)
 
             val characteristic = service.characteristics.firstOrNull { it.uuid == CBLockerConst.DeviceCharacteristicUUID }
-                ?: return gatt.fail(SPRError.CBDiscoveringCharacteristicsFailed)
+                ?: return gatt.fail(SPRError.CBCharacteristicNotFound)
 
             if (needsFirstRead) {
                 gatt.readCharacteristic(characteristic)

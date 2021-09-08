@@ -10,7 +10,6 @@ import androidx.lifecycle.ViewModelProvider
 import com.spacer.example.R
 import com.spacer.example.databinding.FragmentCbLockerBinding
 
-
 class CBLockerFragment : Fragment() {
     private lateinit var binding: FragmentCbLockerBinding
     private val viewModel by lazy { ViewModelProvider(this).get(CBLockerViewModel::class.java) }

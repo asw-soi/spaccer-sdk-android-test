@@ -13,10 +13,7 @@ import com.spacer.sdk.data.SPRError
 import com.spacer.sdk.data.extensions.LoggerExtensions.logd
 
 open class SDKExecutor(protected val fragment: Fragment) {
-    fun run(
-        message: DialogMessage,
-        runnable: (callback: ICallback) -> Unit
-    ) {
+    fun run(message: DialogMessage, runnable: (callback: ICallback) -> Unit) {
         val callback = object : ICallback {
             override fun onSuccess() = success(message, "")
             override fun onFailure(error: SPRError) = fail(error)
@@ -26,10 +23,7 @@ open class SDKExecutor(protected val fragment: Fragment) {
         runnable.invoke(callback)
     }
 
-    fun <T> runGet(
-        message: DialogMessage,
-        runnable: (callback: IResultCallback<T>) -> Unit
-    ) {
+    fun <T> runGet(message: DialogMessage, runnable: (callback: IResultCallback<T>) -> Unit) {
         val callback = object : IResultCallback<T> {
             override fun onSuccess(result: T) = success(message, result)
             override fun onFailure(error: SPRError) = fail(error)
@@ -39,10 +33,7 @@ open class SDKExecutor(protected val fragment: Fragment) {
         runnable.invoke(callback)
     }
 
-    fun <T> runList(
-        message: DialogMessage,
-        runnable: (callback: IResultCallback<List<T>>) -> Unit
-    ) {
+    fun <T> runList(message: DialogMessage, runnable: (callback: IResultCallback<List<T>>) -> Unit) {
         val callback = object : IResultCallback<List<T>> {
             override fun onSuccess(result: List<T>) = success(message, result.joinToString("\n"))
             override fun onFailure(error: SPRError) = fail(error)
@@ -54,7 +45,7 @@ open class SDKExecutor(protected val fragment: Fragment) {
 
     protected fun <T> success(message: DialogMessage, result: T) {
         fragment.stopLoading()
-        fragment.showSuccessDialog(message.append(result.toString()))
+        fragment.showSuccessDialog(message.appendBody(result.toString()))
     }
 
     protected fun fail(error: SPRError) {

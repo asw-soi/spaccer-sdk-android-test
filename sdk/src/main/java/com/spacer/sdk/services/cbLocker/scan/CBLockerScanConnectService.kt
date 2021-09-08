@@ -50,11 +50,6 @@ class CBLockerScanConnectService : CBLockerScanService() {
             }
         }
 
-        override fun onDelayed(): Boolean {
-            if (isScanning) {
-                callback.onFailure(SPRError.CBScanDeviceNotFound)
-            }
-            return true
-        }
+        override fun onDelayed() = !isScanning
     }
 }

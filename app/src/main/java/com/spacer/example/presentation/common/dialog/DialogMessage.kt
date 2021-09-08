@@ -21,7 +21,7 @@ class DialogMessage(titleId: Int, bodyId: Int) {
 
     override fun toString() = "${title},${body}"
 
-    fun append(body: String): DialogMessage {
+    fun appendBody(body: String): DialogMessage {
         this.body = "${this.body}\n${body}"
         return this
     }

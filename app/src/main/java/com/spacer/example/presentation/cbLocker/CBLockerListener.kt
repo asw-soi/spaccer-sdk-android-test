@@ -49,7 +49,7 @@ class CBLockerListener(private val fragment: Fragment) {
             val context = fragment.context ?: return
 
             executor.run(DialogMessage.CbLockerTakeUrlKeySuccess) {
-                SPR.cbLockerService().takeWithUrlKey(context, token, text, it)
+                service.takeWithUrlKey(context, token, text, it)
             }
         }
     }
