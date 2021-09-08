@@ -1,23 +1,23 @@
 package com.spacer.example.presentation.main
 
 import android.content.Context
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MotionEvent
 import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
-import com.spacer.sdk.SPR
-import com.spacer.sdk.data.SPRConfig
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.spacer.example.R
+import com.spacer.example.data.SdkConst.SdkConfig
 import com.spacer.example.databinding.ActivityMainBinding
 import com.spacer.example.presentation.common.PermissionRequester
 import com.spacer.example.presentation.common.progress.LoadingOption
-import kotlinx.android.synthetic.main.activity_main.*
+import com.spacer.sdk.SPR
+
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -43,13 +43,11 @@ class MainActivity : AppCompatActivity() {
 
     private fun initNavController() {
         navController = findNavController(R.id.container)
-        bottom_navigation.setupWithNavController(navController)
+        binding.bottomNavigation.setupWithNavController(navController)
     }
 
     private fun configureSDK() {
-        val config = SPRConfig(baseURL = "http://120.143.1.101:8008/exApp")
-//        val config = SPRConfig(baseURL = "https://api-vsv0ukl18tz6dm.spacer.co.jp")
-        SPR.configure(config)
+        SPR.configure(SdkConfig)
     }
 
     fun startLoading(option: LoadingOption) {

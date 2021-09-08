@@ -1,25 +1,24 @@
 package com.spacer.example.presentation.cbLocker
 
 import androidx.fragment.app.Fragment
-
-import com.spacer.example.presentation.common.SDKExecutor
+import com.spacer.example.data.SdkConst.SdkToken
+import com.spacer.example.presentation.common.SDKRequester
 import com.spacer.example.presentation.common.card.ICardInputViewListener
 import com.spacer.example.presentation.common.card.ICardSimpleViewListener
 import com.spacer.example.presentation.common.dialog.DialogMessage
-import com.spacer.example.presentation.common.token
 import com.spacer.sdk.SPR
 import com.spacer.sdk.models.sprLocker.SPRLockerModel
 
 class CBLockerListener(private val fragment: Fragment) {
     private val service = SPR.cbLockerService()
-    private val executor = SDKExecutor(fragment)
+    private val requester = SDKRequester(fragment)
 
     val scan = object : ICardSimpleViewListener {
         override fun onClicked() {
             val context = fragment.context ?: return
 
-            executor.runList<SPRLockerModel>(DialogMessage.CbLockerScanSuccess) {
-                service.scan(context, token, it)
+            requester.runList<SPRLockerModel>(DialogMessage.CbLockerScanSuccess) {
+                service.scan(context, SdkToken, it)
             }
         }
     }
@@ -28,8 +27,8 @@ class CBLockerListener(private val fragment: Fragment) {
         override fun onClicked(text: String) {
             val context = fragment.context ?: return
 
-            executor.run(DialogMessage.CbLockerPutSuccess) {
-                service.put(context, token, text, it)
+            requester.run(DialogMessage.CbLockerPutSuccess) {
+                service.put(context, SdkToken, text, it)
             }
         }
     }
@@ -38,8 +37,8 @@ class CBLockerListener(private val fragment: Fragment) {
         override fun onClicked(text: String) {
             val context = fragment.context ?: return
 
-            executor.run(DialogMessage.CbLockerTakeSuccess) {
-                service.take(context, token, text, it)
+            requester.run(DialogMessage.CbLockerTakeSuccess) {
+                service.take(context, SdkToken, text, it)
             }
         }
     }
@@ -48,8 +47,8 @@ class CBLockerListener(private val fragment: Fragment) {
         override fun onClicked(text: String) {
             val context = fragment.context ?: return
 
-            executor.run(DialogMessage.CbLockerTakeUrlKeySuccess) {
-                service.takeWithUrlKey(context, token, text, it)
+            requester.run(DialogMessage.CbLockerTakeUrlKeySuccess) {
+                service.takeWithUrlKey(context, SdkToken, text, it)
             }
         }
     }

@@ -1,7 +1,6 @@
 package com.spacer.example.presentation.common
 
 import androidx.fragment.app.Fragment
-import com.spacer.example.BuildConfig
 import com.spacer.example.presentation.common.dialog.DialogMessage
 import com.spacer.example.presentation.extensions.FragmentExtensions.showErrorDialog
 import com.spacer.example.presentation.extensions.FragmentExtensions.showSuccessDialog
@@ -12,7 +11,7 @@ import com.spacer.sdk.data.IResultCallback
 import com.spacer.sdk.data.SPRError
 import com.spacer.sdk.data.extensions.LoggerExtensions.logd
 
-open class SDKExecutor(protected val fragment: Fragment) {
+open class SDKRequester(protected val fragment: Fragment) {
     fun run(message: DialogMessage, runnable: (callback: ICallback) -> Unit) {
         val callback = object : ICallback {
             override fun onSuccess() = success(message, "")
@@ -58,4 +57,3 @@ open class SDKExecutor(protected val fragment: Fragment) {
     }
 }
 
-const val token = BuildConfig.SDK_TOKEN
