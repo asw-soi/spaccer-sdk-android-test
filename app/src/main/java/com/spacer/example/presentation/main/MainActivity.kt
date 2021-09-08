@@ -18,7 +18,6 @@ import com.spacer.example.presentation.common.PermissionRequester
 import com.spacer.example.presentation.common.progress.LoadingOption
 import com.spacer.sdk.SPR
 
-
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private val viewModel by lazy { ViewModelProvider(this).get(MainViewModel::class.java) }
@@ -32,7 +31,7 @@ class MainActivity : AppCompatActivity() {
 
         PermissionRequester(this).run()
 
-        configureSDK()
+        configureSdk()
     }
 
     private fun initDataBinding() {
@@ -46,7 +45,7 @@ class MainActivity : AppCompatActivity() {
         binding.bottomNavigation.setupWithNavController(navController)
     }
 
-    private fun configureSDK() {
+    private fun configureSdk() {
         SPR.configure(SdkConfig)
     }
 

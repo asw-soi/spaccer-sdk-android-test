@@ -11,7 +11,7 @@ import com.spacer.sdk.data.IResultCallback
 import com.spacer.sdk.data.SPRError
 import com.spacer.sdk.data.extensions.LoggerExtensions.logd
 
-open class SDKRequester(protected val fragment: Fragment) {
+open class SdkRequester(protected val fragment: Fragment) {
     fun run(message: DialogMessage, runnable: (callback: ICallback) -> Unit) {
         val callback = object : ICallback {
             override fun onSuccess() = success(message, "")
