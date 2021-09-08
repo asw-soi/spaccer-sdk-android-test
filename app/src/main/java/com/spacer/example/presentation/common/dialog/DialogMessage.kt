@@ -1,5 +1,3 @@
-
-
 package com.spacer.example.presentation.common.dialog
 
 import android.annotation.SuppressLint
@@ -7,24 +5,24 @@ import com.spacer.example.Application
 import com.spacer.example.R
 
 @SuppressLint("StaticFieldLeak")
-class DialogMessage(titleId: Int, bodyId: Int) {
+class DialogMessage {
 
     private val context = Application.context
 
     var title: String
     var body: String
 
-    init {
+    constructor(titleId: Int, bodyId: Int) {
         this.title = context.getString(titleId)
         this.body = context.getString(bodyId)
     }
 
-    override fun toString() = "${title},${body}"
-
-    fun appendBody(body: String): DialogMessage {
-        this.body = "${this.body}\n${body}"
-        return this
+    constructor(title: String, body: String) {
+        this.title = title
+        this.body = body
     }
+
+    override fun toString() = "${title},${body}"
 
     companion object {
         val CbLockerScanSuccess = DialogMessage(R.string.success_title, R.string.cb_scan_success_message)

@@ -44,8 +44,11 @@ open class SDKExecutor(protected val fragment: Fragment) {
     }
 
     protected fun <T> success(message: DialogMessage, result: T) {
+        val newBody = "${message.body}\n${result}"
+        val newMessage = DialogMessage(message.title, newBody)
+
         fragment.stopLoading()
-        fragment.showSuccessDialog(message.appendBody(result.toString()))
+        fragment.showSuccessDialog(newMessage)
     }
 
     protected fun fail(error: SPRError) {

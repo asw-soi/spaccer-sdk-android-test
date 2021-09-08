@@ -4,6 +4,7 @@ import android.content.Context
 import com.spacer.sdk.data.ICallback
 import com.spacer.sdk.data.IResultCallback
 import com.spacer.sdk.data.SPRError
+import com.spacer.sdk.data.extensions.LoggerExtensions.logd
 import com.spacer.sdk.models.cbLocker.CBLockerModel
 import com.spacer.sdk.services.cbLocker.gatt.CBLockerGattPutService
 import com.spacer.sdk.services.cbLocker.gatt.CBLockerGattTakeService
@@ -51,5 +52,7 @@ class CBLockerScanConnectService : CBLockerScanService() {
         }
 
         override fun onDelayed() = !isScanning
+
+        override fun onFailure(error: SPRError) = callback.onFailure(error)
     }
 }

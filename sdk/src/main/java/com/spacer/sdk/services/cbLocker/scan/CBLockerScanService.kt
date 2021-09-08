@@ -57,8 +57,8 @@ open class CBLockerScanService {
                 scanningCnt++
                 logd("scanningCnt: $scanningCnt")
 
-                val isFinished = scanCallback.onDelayed()
-                if (isFinished) {
+                val isScanned = scanCallback.onDelayed()
+                if (isScanned) {
                     return stopScan()
                 }
 
@@ -103,7 +103,6 @@ open class CBLockerScanService {
 
         override fun onScanResult(callbackType: Int, result: ScanResult?) {
             super.onScanResult(callbackType, result)
-            logd("onScanResult: $callbackType, ${result?.device?.address}, ${result?.device?.name}")
 
             if (callbackType == ScanSettings.CALLBACK_TYPE_ALL_MATCHES) {
                 val deviceName = result?.device?.name ?: return

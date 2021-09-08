@@ -1,6 +1,6 @@
 plugins {
-//    id 'com.android.application'
-    id 'com.android.library'
+    id 'com.android.application'
+//    id 'com.android.library'
     id 'kotlin-android'
     id 'kotlin-kapt'
     id 'kotlin-android-extensions'
@@ -11,7 +11,7 @@ android {
     buildToolsVersion "30.0.0"
 
     defaultConfig {
-//        applicationId "com.spacer.example"
+        applicationId "com.spacer.example"
         minSdkVersion 23
         targetSdkVersion 30
         versionCode 1
@@ -47,6 +47,10 @@ android {
     }
 }
 
+repositories {
+    maven { url 'https://raw.githubusercontent.com/asw-soi/spaccer-sdk-android-test/main/repository'}
+}
+
 dependencies {
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
@@ -72,5 +76,6 @@ dependencies {
     implementation "org.koin:koin-androidx-scope:2.0.1"
     implementation "org.koin:koin-androidx-viewmodel:2.0.1"
 
+//    implementation 'com.spacer:sdk:1.0.0'
     implementation project(":sdk")
 }
